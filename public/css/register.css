@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+    min-height: 100vh;
+    background-image: url(/img/bg.png);
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    place-items: center;
+    font-family: "Inter", sans-serif;
+}
+
+.section {
+    max-width: 448px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    background-color: #f8fafc;
+    border-radius: 16px;
+    box-shadow: 
+        15px 15px 30px #bebebe,
+        -15px -15px 30px #bebebe;
+
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+.container h2 {
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+    color: #111827;
+    margin-top: 35px;
+}
+
+.container p {
+    font-size: 16px;
+    color: #6b7280;
+}
+.inputlogin {
+    justify-content: center;
+    align-items: center;
+}
+.inputlogin p {
+    margin-bottom: 5px;
+    text-align: left;
+    color: #374151;
+    font-size: 16px;
+
+}
+
+/* .forgotbn {
+    float: right;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    color: #6b7280;
+    margin-right: 15px;
+} */
+
+
+.signinbtn { 
+    background-color: #000000;
+    color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+    border: 1px solid #111111;
+    transition: .5s ease;
+    font-size: 18px;
+}
+
+.signinbtn:hover {
+    background-color: #18253f;
+}
+
+.paragraph {
+    margin-bottom: 5px;
+}
+
+.inputlogin {
+    margin: 45px;
+}
+
+.inputlogin input {
+  width: 100%;
+  height: 45px;
+  padding: 0 3rem;
+  padding-left: 3rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  background-color: #f8fafc;
+  color: #0b0a17;
+  transition: .5s ease;
+  margin-bottom: 15px;
+}
+
+.inputlogin input::placeholder {
+  color: #94a3b8;
+}
+
+.input:focus, input:hover {
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgb(129 140 248 / 25%);
+}
+.email {
+    background-image: url("/img/Email--Streamline-Carbon.svg");
+    background-repeat: no-repeat;
+    background-position: left 6px center;
+    padding-right: 36px;
+}
+
+.name {
+  background-image: url("/img/User--Streamline-Feather.svg");
+  background-repeat: no-repeat;
+  background-position: left 6px center;
+  padding-right: 36px;
+}
+
+.password {
+  background-image: url("/img/Password--Streamline-Carbon.svg");
+  background-repeat: no-repeat;
+  background-position: left 6px center;
+  padding-right: 36px;
+}
+
+
+.createbtn {
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+    width: 40%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px solid rgb(229, 231, 235);
+    transition: 300ms ease;
+    font-size: 18px;
+    margin-bottom: 30px; 
+}
+
+.createbtn:hover {
+    border: 1px solid #111111;
+}
+

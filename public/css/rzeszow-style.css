@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+header {
+    position: sticky;
+    top: 0;
+    background: #e2e2e2;
+    z-index: 1000;
+    border-bottom: 1px solid #000000;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    }
+
+.header {
+    padding: 16px 16px;
+}
+
+.info-city-container > p {
+    color: #ffffff;
+}
+
+.header-logo::before {
+    content: "";
+    background: url(../img/MarkLogo.svg) no-repeat center;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    transform: translateY(20%);
+    margin-right: 8px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-logo {
+    font-weight: 600;
+    font-size: 23px;
+    margin: auto 0;
+    color: #000000;
+}
+
+.header-nav > a {
+    display: inline-block;
+    padding: 8px 28px;
+    font-size: 16px;
+    border: 1px solid black;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: #000;
+}
+
+.places-container {
+    position: relative;
+    justify-items: center;
+}
+
+.places-container h2 {
+    margin-top: 120px;
+    margin-bottom: 8px;
+    font-size: 36px;
+}
+
+.places-container p {
+    color: #4b5563;
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
+.places-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 30px;
+}
+
+.box-card {
+    border: 1.5px solid #3a3a3a;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-card p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #4b5563;
+    margin: 0px 5px 30px 20px;
+}
+
+.box-card h3 {
+    margin: 0 5px 8px 20px;
+}
+
+.btn-learn_more {
+    display: flex;
+    justify-content: space-between;
+    margin: auto 5px 15px 20px;
+}
+
+.btn-learn_more button {
+    margin-right: 20px;
+}
+
+.btn-learn_more button img {
+    height: 30px;
+    width: 30px;
+}
+
+.btn-learn_more a {
+    color: #ffffff;
+    border-radius: 10px;
+    width: 80%;
+    height: 35px;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-card > img {
+    display: block;
+    width: 101%;
+    height: auto;
+    margin-bottom: 50px;
+}
+
+.goverment_services-container h2 {
+    margin-top: 190px;
+    margin-bottom: 8px;
+    font-size: 36px;
+}
+
+.goverment_services-container p {
+    color: #4b5563;
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
+.gov-card h3 {
+    margin-top: 10px;
+    margin-bottom: 45px;
+}
+
+.gov-card p {
+    margin-bottom: 9px;
+}
+
+.card-address::before {
+    content: "";
+    background: url(../img/mark.svg) no-repeat center;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 7px;
+    transform: translateY(20%);
+}
+
+.card-time::before {
+    content: "";
+    background: url(../img/clock.svg) no-repeat center;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 7px;
+    transform: translateY(20%);
+}
+
+.gov-card a {
+    color: #000000;
+    border-radius: 10px;
+    width: 90%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 5px 15px 20px;
+    border: 1px solid #4b5563;
+}
+
+.goverment_services-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 30px;
+}
+
+.gov-card h3::before {
+    content: "";
+    background: url(../img/Doc.svg) no-repeat center;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    margin-right: 10px;
+    transform: translateY(20%);
+}
+
+.info-city {
+    position: relative;
+    background-image: url(./img/rzeszow.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-city .container {
+    position: relative;
+    text-align: center;
+    display: grid;
+    gap: 25px;
+    z-index: 2;
+}
+
+.info-city h1 {
+    font-weight: 700;
+    font-size: 51px;
+    text-align: center;
+    color: #fff;
+}
+
+.info-city-btns-wrapper {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.info-city-btns-wrapper button {
+    padding: 12px 22px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(107, 107, 107, 0.8);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.info-city-btns-wrapper button:hover {
+    color: #000000;
+    background: rgba(107, 107, 107, 1);
+}
+
+.events-container h2 {
+    margin-top: 190px;
+    margin-bottom: 8px;
+    font-size: 36px;
+}
+
+.events-container p {
+    color: #4b5563;
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
+.events-card {
+    position: relative;
+}
+
+.card-date {
+    position: absolute;
+    top: 15px;
+    right: 16px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px 12px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.card-date span {
+    display: block;
+}
+
+.events-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 30px;
+}
+
+.events-card a {
+    color: #fffcfc;
+    background: #000000;
+    border-radius: 10px;
+    width: 90%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 5px 15px 20px;
+    border: 1px solid #4b5563;
+}
+
+.footer {
+    background-color: #111827;
+    margin-top: 130px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.footer-container div {
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+
+.footer-container div * {
+    display: block;
+    color: #9ca3af;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-container span {
+    color: #fff;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.social_media a {
+    text-align: left;
+    color: #9ca3af;
+}
+
+.footer-container h3 {
+    font-weight: 600;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.footer-line {
+    color: #9ca3af;
+    font-size: 16px;
+    border-top: 1px solid #a5a6a8;
+    position: relative;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+
+@media(max-width: 960px) {
+
+    .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+    }
+    .places-box {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+
+
+}
+@media(max-width: 960px) {
+
+    .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+    }
+    .places-box {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr)
+
+    }
+
+
+    .goverment_services-box {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .events-box {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+}
+
+@media(max-width: 690px) {
+
+    .container {
+    max-width: 524px;
+    margin: 0 auto;
+    padding: 0 16px;
+    }
+    .places-box {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .goverment_services-box {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .events-box {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 490px) {
+  .footer-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+
+  .header-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+}
+
+@media (max-width: 360px) {
+  .footer-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
