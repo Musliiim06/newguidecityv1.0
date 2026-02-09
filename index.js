@@ -1,126 +1,157 @@
-const express = require('express')
-const path = require('path')
-const mysql = require('mysql2')
-const bcrypt = require("bcrypt");
+const express = require('express');
+const path = require('path');
+const mysql = require('mysql2');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
 
+const app = express();
 
-const app = express()
-
+/* ================== MIDDLEWARE ================== */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-const db = mysql.createConnection({
-  host: "MySQL-8.0",
-  user: "root",
-  password: "",
-  database: "myfirstbd"
-});
-
-// 3️⃣ Статические файлы (CSS, JS, картинки)
-app.use(express.static(path.join(__dirname, "public")));
-// 4️⃣ HTML страница
-app.get("/", (req, res) => {res.sendFile(path.join(__dirname, "views", "warsaw.html"));});
-
-app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "login.html"));
-});
-
-app.get("/register", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "register.html"));
-});
-
-app.get("/me", (req, res) => {
-  res.sendFile(path.join(__dirname, "src", "me.html"));
-});
-
-
-
-
-
-// REGISTER
-app.post("/register", async (req, res) => {
-  try {
-    const { email, password, name } = req.body;
-
-    // 1️⃣ Проверка ДО всего
-    if (!email || !password || !name) {
-      return res.status(400).json({ message: "Заполните все поля" });
+app.use(
+  session({
+    secret: 'my-super-secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60
     }
+  })
+);
 
-    // 2️⃣ Хешируем пароль
-    const hash = await bcrypt.hash(password, 10);
-
-    // 3️⃣ SQL-запрос
-    db.query(
-      "INSERT INTO user (email, name, password) VALUES (?, ?, ?)",
-      [email, name, hash],
-      (err) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).json({ message: "Ошибка БД" });
-        }
-        
-        // 4️⃣ Ответ клиенту
-        // res.status(201).json({ message: "Регистрация успешна"});
-        res.redirect("/login");
-       
-        
-      }
-      
-    );
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Ошибка сервера" });
-  }
- 
+/* ================== DATABASE ================== */
+const db = mysql.createConnection({
+  host: 'MySQL-8.0',
+  user: 'root',
+  password: '',
+  database: 'myfirstbd'
 });
 
+db.connect(err => {
+  if (err) {
+    console.error('DB ERROR:', err);
+  } else {
+    console.log('MySQL connected');
+  }
+});
 
+/* ================== STATIC FILES ================== */
+app.use(express.static(path.join(__dirname, 'public')));
 
-// ЛОГИН
-app.post("/login", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+/* ================== PAGES ================== */
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'warsaw.html'));
+});
 
-  // 1. если не прислали данные
-  if (!email || !password) {
-    return res.send("Нет email или пароля");
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
+
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'register.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
+});
+
+/* ================== API ================== */
+
+/* 🔌 КТО Я */
+app.get('/api/me', (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).end();
   }
 
-  // 2. ищем пользователя
   db.query(
-    "SELECT * FROM user WHERE email = ?",
-    [email],
-    (err, result) => {
-      if (err) {
-        console.log(err); 
-        return res.send("Ошибка базы");
-      }
+    'SELECT id, email, name FROM `user` WHERE id = ?',
+    [req.session.userId],
+    (err, rows) => {
+      if (err) return res.status(500).end();
+      if (rows.length === 0) return res.status(401).end();
 
-      // 3. если нет такого пользователя
-      if (result.length === 0) {
-        return res.send("Пользователь не найден");
-      }
-
-      const user = result[0];
-
-      // 4. сравниваем пароль
-      const ok = bcrypt.compareSync(password, user.password);
-
-      if (!ok) {
-        return res.send("Неверный пароль");
-      }
-
-      // 5. успех
-      res.redirect("/me")
-      
+      res.json(rows[0]);
     }
   );
 });
 
+/* 🔌 DASHBOARD DATA */
+app.get('/api/dashboard', (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).end();
+  }
 
+  db.query(
+    'SELECT email, name FROM `user` WHERE id = ?',
+    [req.session.userId],
+    (err, rows) => {
+      if (err) return res.status(500).end();
+      res.json(rows);
+    }
+  );
+});
+
+/* ================== AUTH ================== */
+
+/* REGISTER */
+app.post('/register', (req, res) => {
+  const { email, password, name } = req.body;
+
+  if (!email || !password || !name) {
+    return res.send('Заполните все поля');
+  }
+
+  const hash = bcrypt.hashSync(password, 10);
+
+  db.query(
+    'INSERT INTO `user` (email, name, password) VALUES (?, ?, ?)',
+    [email, name, hash],
+    err => {
+      if (err) return res.send('Ошибка БД');
+      res.redirect('/login');
+    }
+  );
+});
+
+/* LOGIN */
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.send('Нет email или пароля');
+  }
+
+  db.query(
+    'SELECT * FROM `user` WHERE email = ?',
+    [email],
+    (err, rows) => {
+      if (err) return res.send('Ошибка БД');
+      if (rows.length === 0) return res.send('Пользователь не найден');
+
+      const user = rows[0];
+      const ok = bcrypt.compareSync(password, user.password);
+      if (!ok) return res.send('Неверный пароль');
+
+      /* 🔑 ВАЖНО: сохраняем ТОЛЬКО ID */
+      req.session.userId = user.id;
+
+      res.redirect('/');
+    }
+  );
+});
+
+/* LOGOUT */
+app.post('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('connect.sid');
+    res.json({ ok: true });
+  });
+});
+
+/* ================== SERVER ================== */
 app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000')
-})
-
+  console.log('Server running: http://localhost:3000');
+});

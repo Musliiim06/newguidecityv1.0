@@ -9,13 +9,17 @@
     <title>Document</title>
 </head>
 <body>
+
     <header class="header">
         <div class="container header-container">
-            <a href="#" class="header-logo">City Guide</a>
+            <a href="/" class="header-logo">City Guide</a>
         
             <nav class="header-nav">
-                <a href="/login">Sign in</a>
-                <a href="/register">sign on</a>
+                <a href="/login" id="signin-btn">Sign in</a>
+                <a href="/register" id="signup-btn">sign up</a>
+                <a id="dashboard-btn" type="button" >Dashboard</a>
+                <button id="logout-btn" style="display:none">Logout</button>
+
             </nav>
             </div>
     </header>
@@ -257,5 +261,54 @@
 
         <p class="footer-line"><span>©</span> 2026 City Guide. All rights reserved.</p>
     </footer>
+
+
+
+<script>
+
+    const signIn = document.getElementById('signin-btn')
+    const signUp = document.getElementById('signup-btn')
+    const dashboardbtn = document.getElementById('dashboard-btn')
+    const logoutBtn = document.getElementById('logout-btn')
+    
+
+    async function checkAuth() {
+    const res = await fetch('/api/me');
+
+    if (res.status === 401) {
+        // ❌ не авторизован
+        signIn.style.display = 'inline-block';
+        signUp.style.display = 'inline-block';
+        dashboardbtn.style.display = 'none';
+        logoutBtn.style.display = 'none';
+        return;
+    }
+
+    // ✅ авторизован
+    signIn.style.display = 'none';
+    signUp.style.display = 'none';
+    dashboardbtn.style.display = 'inline-block';
+    logoutBtn.style.display = 'inline-block';
+    }
+    checkAuth();
+   
+
+
+    logoutBtn.onclick = async () => {
+    const res = await fetch('/logout', { method: 'POST' })
+
+    if (res.ok) {
+        window.location.reload()
+    } else {
+        alert('Logout failed')
+    }
+    }
+    
+    dashboardbtn.addEventListener('click', () => {
+        console.log('CLICKED');
+        window.location.href = '/dashboard';
+    })
+</script>
+  
 </body>
 </html>
