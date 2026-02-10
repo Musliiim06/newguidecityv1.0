@@ -6,7 +6,6 @@ const session = require('express-session');
 
 const app = express();
 
-/* ================== MIDDLEWARE ================== */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -22,7 +21,6 @@ app.use(
   })
 );
 
-/* ================== DATABASE ================== */
 const db = mysql.createConnection({
   host: 'MySQL-8.0',
   user: 'root',
@@ -38,10 +36,8 @@ db.connect(err => {
   }
 });
 
-/* ================== STATIC FILES ================== */
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* ================== PAGES ================== */
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'warsaw.html'));
 });
@@ -58,9 +54,7 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
 });
 
-/* ================== API ================== */
 
-/* 🔌 КТО Я */
 app.get('/api/me', (req, res) => {
   if (!req.session.userId) {
     return res.status(401).end();
@@ -94,7 +88,6 @@ app.get('/api/dashboard', (req, res) => {
   );
 });
 
-/* ================== AUTH ================== */
 
 /* REGISTER */
 app.post('/register', (req, res) => {
@@ -135,7 +128,6 @@ app.post('/login', (req, res) => {
       const ok = bcrypt.compareSync(password, user.password);
       if (!ok) return res.send('Неверный пароль');
 
-      /* 🔑 ВАЖНО: сохраняем ТОЛЬКО ID */
       req.session.userId = user.id;
 
       res.redirect('/');
@@ -151,7 +143,6 @@ app.post('/logout', (req, res) => {
   });
 });
 
-/* ================== SERVER ================== */
 app.listen(3000, () => {
   console.log('Server running: http://localhost:3000');
 });

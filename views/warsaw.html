@@ -18,7 +18,7 @@
                 <a href="/login" id="signin-btn">Sign in</a>
                 <a href="/register" id="signup-btn">sign up</a>
                 <a id="dashboard-btn" type="button" >Dashboard</a>
-                <button id="logout-btn" style="display:none">Logout</button>
+                <!-- <button id="logout-btn" style="display:none">Logout</button> -->
 
             </nav>
             </div>
@@ -30,14 +30,14 @@
         <p>Discover the best places, services, and events</p>
 
         <div class="info-city-btns-wrapper">
-            <button>Popular places</button>
-            <button>Services</button>
-            <button>Events</button>
+            <button id="places-button">Popular places</button>
+            <button id="services-button">Services</button>
+            <button id="events-button">Events</button>
         </div>
     </div>
     </section>
 
-    <section class="places">
+    <section class="places" id="places">
         <div class="container places-container">
             <h2>Beautiful places</h2>
             <p>Discover the most scenic spots in our city</p>
@@ -46,8 +46,8 @@
                 <div class="places-box">
                     <div class="box-card">
                         <img src="/img/img-warsaw/OldTownSquare.png" alt="">
-                        <h3>Old Town Market Square</h3>
-                        <p>Historic heart of Warsaw, rebuilt after WWII.</p>
+                        <h3>Old Town Square</h3>
+                        <p>Historic heart of the city, carefully rebuilt after World War II.</p>
                         <div class="btn-learn_more">
                             <a href="">Learn more</a>
                             <button><img src="../img/70653.png" alt=""></button>
@@ -56,8 +56,8 @@
 
                     <div class="box-card">
                         <img src="/img/img-warsaw/LazienkiPark.png" alt="">
-                        <h3>National Museum</h3>
-                        <p>Rich collection of modern art and historical exhibits.</p>
+                        <h3>Łazienki Park</h3>
+                        <p>Elegant palace surrounded by peaceful gardens and lakes.</p>
                         <div class="btn-learn_more">
                             <a href="">Learn more</a>
                             <button><img src="../img/70653.png" alt=""></button>
@@ -70,9 +70,9 @@
 
                 
                     <div class="box-card">
-                        <img src="/img/img-warsaw/OldTownSquare.png" alt="">
-                        <h3>Old Town Market Square</h3>
-                        <p>Historic heart of Warsaw, rebuilt after WWII.</p>
+                        <img src="/img/img-warsaw/palaceOfCulture.png" alt="">
+                        <h3>Palace of Culture and Science</h3>
+                        <p>Warsaw’s most iconic skyscraper and cultural landmark.</p>
                         <div class="btn-learn_more">
                             <a href="">Learn more</a>
                             <button><img src="../img/70653.png" alt=""></button>
@@ -80,9 +80,9 @@
                     </div>
 
                     <div class="box-card">
-                        <img src="/img/img-warsaw/LazienkiPark.png" alt="">
-                        <h3>National Museum</h3>
-                        <p>Rich collection of modern art and historical exhibits.</p>
+                        <img src="/img/img-warsaw/TheRoyalCastle.png" alt="">
+                        <h3>Royal Castle</h3>
+                        <p>Former residence of Polish kings and national symbol.</p>
                         <div class="btn-learn_more">
                             <a href="">Learn more</a>
                             <button><img src="../img/70653.png" alt=""></button>
@@ -95,8 +95,8 @@
 
                     <div class="box-card">
                         <img src="/img/img-warsaw/WarsawUprisingMuseum.png" alt="">
-                        <h3>National Museum</h3>
-                        <p>Rich collection of modern art and historical exhibits.</p>
+                        <h3>Warsaw Uprising Museum</h3>
+                        <p>Powerful museum telling the story of the 1944 uprising.</p>
                         <div class="btn-learn_more">
                             <a href="">Learn more</a>
                             <button><img src="../img/70653.png" alt=""></button>
@@ -105,8 +105,8 @@
 
                     <div class="box-card">
                         <img src="/img/img-warsaw/WilanowPalace.png" alt="">
-                        <h3>Historic Square</h3>
-                        <p>18th-century architectural ensemble. Heart of the old town.</p>
+                        <h3>Wilanów Palace</h3>
+                        <p>1Magnificent baroque palace known as the “Polish Versailles”.</p>
                         <div class="btn-learn_more">
                             <a href="">Learn more</a>
                             <button><img src="../img/70653.png" alt=""></button>
@@ -118,17 +118,17 @@
 
     </section>
 
-    <section class="goverment_services">
+    <section class="goverment_services" id="services">
         <div class="container goverment_services-container">
             <h2 style="text-align: center;">Government Services</h2>
             <p style="text-align: center;">Essential institutions and services for city residents</p>
 
             <div class="goverment_services-box">
                 <div class="box-card gov-card">
-                    <h3>Public Service Center</h3>
+                    <h3>Mazowiecki Urząd Wojewódzki w Warszawie</h3>
 
-                    <p class="card-address">45 Central Street</p>
-                    <p class="card-time">Mon-Fri: 9:00-18:00</p>
+                    <p class="card-address">Marszałkowska 3/5, 00-624 Warszawa</p>
+                    <p class="card-time">Mon-Fri: 8am-3pm</p>
                     <a href="">open</a>
                 </div>
 
@@ -178,7 +178,7 @@
     </section>
 
 
-    <section class="events">
+    <section class="events" id="events">
         <div class="container events-container">
             <h2 style="text-align: center;">Upcoming Events</h2>
             <p style="text-align: center;">Don't miss exciting events happening in the city</p>
@@ -293,21 +293,41 @@
     checkAuth();
    
 
-
-    logoutBtn.onclick = async () => {
-    const res = await fetch('/logout', { method: 'POST' })
-
-    if (res.ok) {
-        window.location.reload()
-    } else {
-        alert('Logout failed')
-    }
-    }
     
     dashboardbtn.addEventListener('click', () => {
         console.log('CLICKED');
         window.location.href = '/dashboard';
     })
+
+const places = document.getElementById('places')
+const services = document.getElementById('services')
+const events = document.getElementById('events')
+
+const placesbutton = document.getElementById('places-button')
+const servicesbutton = document.getElementById('services-button')
+const eventsbutton = document.getElementById('events-button')
+
+placesbutton.addEventListener ('click', () => {
+    places.scrollIntoView ({
+        behavior: 'smooth',
+        block: 'start'
+    })
+})
+
+servicesbutton.addEventListener ('click', () => {
+    services.scrollIntoView ({
+        behavior: 'smooth',
+        block: 'start'
+    })
+})
+
+eventsbutton.addEventListener ('click', () => {
+    events.scrollIntoView ({
+        behavior: 'smooth',
+        block: 'start'
+    })
+})
+
 </script>
   
 </body>
