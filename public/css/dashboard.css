@@ -225,7 +225,7 @@ header {
 }
 
 .section.open .section-content {
-  max-height: 400px; /* с запасом */
+  max-height: 400px;
   opacity: 1;
 }
 
@@ -260,7 +260,6 @@ header {
   opacity: 0;
   transition: opacity 0.3s ease;
 
-  /* важно */
   pointer-events: auto;
 }
 
@@ -279,7 +278,7 @@ header {
 .box1.hidden {
   opacity: 1;
   margin-top: 0;
-  /* pointer-events: none; чтобы нельзя было кликнуть */
+
 }
 
 
